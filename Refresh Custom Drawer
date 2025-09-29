@@ -1,0 +1,22 @@
+function refreshCartDrawer() {
+  
+  console.log("Refreshing cart drawer...");
+  fetch(window.location.pathname + "?sections=custom_cart_drawer")
+    .then(res => res.json())
+    .then(data => {
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = data["custom_cart_drawer"];
+
+      const newDrawerContent = tempDiv.querySelector(".custom_cart_drawer");
+      const oldDrawer = document.querySelector(".custom_cart_drawer");
+
+      if (newDrawerContent && oldDrawer) {
+        oldDrawer.innerHTML = newDrawerContent.innerHTML;
+document.querySelector(".custom_cart_drawer")?.classList.add("open");
+        // 🔹 After refresh, reinitialize sliders or events
+        initCartDrawerComponents();
+      }
+    })
+    .catch(err => console.error("Error refreshing cart drawer:", err));
+}
+refreshCartDrawer();
