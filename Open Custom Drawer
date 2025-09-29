@@ -1,0 +1,12 @@
+(function() {
+  const originalFetch = window.fetch;
+  window.fetch = async function(...args) {
+    const response = await originalFetch.apply(this, args);
+    if (args[0].includes('/cart/add')) {
+$('.custom_cart_drawer').addClass('open');
+
+        
+    }
+    return response;
+  };
+})();
